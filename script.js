@@ -1,62 +1,25 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const messagesContainer = document.getElementById('chat-messages');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+// Sample product data (you can replace this with your actual product data)
+const products = [
+    { name: 'Herbal Tea', price: '$9.99', image: 'tea.jpg' },
+    { name: 'Herbal Soap', price: '$5.99', image: 'soap.jpg' },
+    { name: 'Herbal Shampoo', price: '$12.99', image: 'shampoo.jpg' }
+  ];
   
-    function sendMessage() {
-      const message = userInput.value.trim();
-      if (message !== '') {
-        const messageElement = document.createElement('div');
-        messageElement.textContent = message;
-        messagesContainer.appendChild(messageElement);
-        userInput.value = '';
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-      }
-    }
-  
-    sendButton.addEventListener('click', sendMessage);
-  
-    userInput.addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') {
-        sendMessage();
-      }
+  // Function to generate product cards
+  function generateProductCards() {
+    const productList = document.getElementById('product-list');
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.classList.add('product-card');
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.price}</p>
+      `;
+      productList.appendChild(card);
     });
-  });
-  document.addEventListener('DOMContentLoaded', function() {
-  const messagesContainer = document.getElementById('chat-messages');
-  const userInput = document.getElementById('user-input');
-  const sendButton = document.getElementById('send-button');
-
-  function sendMessage() {
-    const message = userInput.value.trim();
-    if (message !== '') {
-      const messageElement = document.createElement('div');
-      messageElement.textContent = message;
-      messagesContainer.appendChild(messageElement);
-      userInput.value = '';
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
   }
-
-  function deleteMessage() {
-    const messageElements = messagesContainer.querySelectorAll('div');
-    if (messageElements.length > 0) {
-      messagesContainer.removeChild(messageElements[0]);
-    }
-  }
-
-  sendButton.addEventListener('click', sendMessage);
-
-  userInput.addEventListener('keypress', function(event) {
-    if (event.key === 'Enter') {
-      sendMessage();
-    }
-  });
-
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Delete Message';
-  deleteButton.addEventListener('click', deleteMessage);
-  document.body.appendChild(deleteButton);
-});
-
+  
+  // Generate product cards when the page loads
+  document.addEventListener('DOMContentLoaded', generateProductCards);
   
